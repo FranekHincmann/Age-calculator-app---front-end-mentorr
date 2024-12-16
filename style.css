@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* colors */
+
+  --clr-Purple: hsl(259, 100%, 65%);
+  --clr-Light-red: hsl(0, 100%, 67%);
+  --clr-White: hsl(0, 0%, 100%);
+  --clr-Off-white: hsl(0, 0%, 94%);
+  --clr-Light-grey: hsl(0, 0%, 86%);
+  --clr-Smokey-grey: hsl(0, 1%, 44%);
+  --clr-Off-black: hsl(0, 0%, 8%);
+  /*fonts */
+  --ff1-font-family: "Roboto", serif; /*    Weights: 400i, 700, 800i    */
+}
+
+body {
+  background: var(--clr-Off-white);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--ff1-font-family);
+}
+
+.container {
+  background: white;
+  width: 700px;
+  height: 580px;
+  border-radius: 1.5rem 1.5rem 10rem 1.5rem;
+}
+
+.dateInputs {
+  display: flex;
+  gap: 2rem;
+  margin: 2.5rem;
+  font-size: 1.2rem;
+  color: var(--clr-Smokey-grey);
+}
+.dateInputs h5 {
+  font-weight: 600;
+  padding-bottom: 0.7rem;
+}
+input {
+  width: 8rem;
+  height: 3.5rem;
+  padding-left: 1.2rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+  border: 1px solid lightsteelblue;
+  border-radius: 0.5rem;
+}
+input:hover {
+  outline: none;
+  border: 1px solid black;
+}
+input:focus {
+  outline: none;
+  border: 1px solid black;
+}
+hr {
+  margin-left: 2.8rem;
+  margin-right: 3rem;
+  border: 1px solid lightgrey;
+}
+
+button {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  top: -2.8rem;
+  right: -36rem;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--clr-Purple);
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--clr-Off-black);
+}
+button:focus {
+  background-color: var(--clr-Off-black);
+}
+
+.date-after-click {
+  margin-left: 4rem;
+  font-size: 2.5rem;
+}
+span {
+  color: var(--clr-Purple);
+}
+.error {
+  color: red;
+  font-size: 0.8rem;
+  padding-top: 0.4rem;
+  font-weight: 200;
+  display: none;
+}
+.letter {
+  letter-spacing: 4px;
+}
+
+@media (max-width: 400px) {
+  .container {
+    width: 95%;
+    height: auto;
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+
+  .dateInputs {
+    flex-direction: column; /* Ustawia pola wejściowe w kolumnie */
+    align-items: flex-start;
+    gap: 1rem; /* Mniejsze odstępy między polami */
+    margin: 1rem;
+  }
+
+  input {
+    width: 100%; /* Pole tekstowe zajmuje pełną szerokość kontenera */
+    height: 3rem;
+    font-size: 1rem; /* Zmniejszony rozmiar czcionki */
+  }
+
+  button {
+    width: 70px;
+    height: 70px;
+    right: auto;
+    margin: 1rem auto; /* Wyśrodkowanie przycisku */
+    position: static; /* Usunięcie relatywnej pozycji */
+  }
+
+  .hr-button hr {
+    margin: 0 auto 1rem auto; /* Wyśrodkowanie linii */
+    width: 90%;
+  }
+
+  .date-after-click {
+    margin: 1rem 0;
+    font-size: 1.8rem; /* Mniejsza czcionka dla wyniku */
+    text-align: center;
+  }
+
+  span {
+    font-size: 1.8rem;
+  }
+
+  .error {
+    font-size: 0.7rem; /* Mniejsza czcionka komunikatu o błędzie */
+  }
+
+  .letter {
+    letter-spacing: 2px; /* Zmniejszenie odstępów między literami */
+  }
+  span {
+    font-size: 4rem;
+  }
+}

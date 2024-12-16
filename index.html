@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>My Solution | Age calculator app</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="dateInputs">
+        <div class="day">
+          <h5 class="letter">DAY</h5>
+          <input type="text" placeholder="DD" />
+          <h5 class="error">Must be a valid day</h5>
+        </div>
+
+        <div class="Month">
+          <h5 class="letter">MONTH</h5>
+          <input type="text" placeholder="MM" />
+          <h5 class="error">Must be a valid month</h5>
+        </div>
+
+        <div class="Year">
+          <h5 class="letter">YEAR</h5>
+          <input type="text" placeholder="YYYY" />
+          <h5 class="error">Must be in the past</h5>
+        </div>
+      </header>
+      <div class="hr-button">
+        <hr />
+        <!-- black line -->
+
+        <button><img src="./assets/images/icon-arrow.svg" alt="" /></button>
+      </div>
+
+      <div class="date-after-click">
+        <div class="date-year">
+          <h1><span class="span-years">--</span> years</h1>
+        </div>
+
+        <div class="date-months">
+          <h1><span class="span-months">--</span> months</h1>
+        </div>
+
+        <div class="date-days">
+          <h1><span class="span-days">--</span> days</h1>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculateAge(birthDate) {
+        const now = new Date(); // Aktualna data
+
+        let years = now.getFullYear() - birthDate.getFullYear();
+        let months = now.getMonth() - birthDate.getMonth();
+        let days = now.getDate() - birthDate.getDate();
+
+        if (days < 0) {
+          months--;
+          days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        }
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+
+        return { years, months, days };
+      }
+
+      document.querySelector("button").addEventListener("click", () => {
+        // Pobieranie wartości inputów
+        const dayInput = document.querySelector(".day input");
+        const monthInput = document.querySelector(".Month input");
+        const yearInput = document.querySelector(".Year input");
+
+        const day = parseInt(dayInput.value, 10);
+        const month = parseInt(monthInput.value, 10);
+        const year = parseInt(yearInput.value, 10);
+
+        // Pobieranie elementów błędów i etykiet
+        const dayError = document.querySelector(".day .error");
+        const monthError = document.querySelector(".Month .error");
+        const yearError = document.querySelector(".Year .error");
+
+        const dayLabel = document.querySelector(".day .letter");
+        const monthLabel = document.querySelector(".Month .letter");
+        const yearLabel = document.querySelector(".Year .letter");
+
+        // Resetowanie błędów
+        dayError.style.display = "none";
+        monthError.style.display = "none";
+        yearError.style.display = "none";
+
+        dayInput.style.borderColor = "";
+        monthInput.style.borderColor = "";
+        yearInput.style.borderColor = "";
+
+        dayLabel.style.color = "";
+        monthLabel.style.color = "";
+        yearLabel.style.color = "";
+
+        // Walidacja
+        let hasError = false;
+
+        if (isNaN(day) || day < 1 || day > 31) {
+          dayError.style.display = "block";
+          dayInput.style.borderColor = "red";
+          dayLabel.style.color = "red";
+          hasError = true;
+        }
+
+        if (isNaN(month) || month < 1 || month > 12) {
+          monthError.style.display = "block";
+          monthInput.style.borderColor = "red";
+          monthLabel.style.color = "red";
+          hasError = true;
+        }
+
+        if (isNaN(year) || year < 1900 || year > new Date().getFullYear()) {
+          yearError.style.display = "block";
+          yearInput.style.borderColor = "red";
+          yearLabel.style.color = "red";
+          hasError = true;
+        }
+
+        if (hasError) {
+          return; // Przerwij, jeśli są błędy
+        }
+
+        // Tworzenie daty urodzenia i obliczanie wieku
+        const birthDate = new Date(year, month - 1, day);
+        const { years, months, days } = calculateAge(birthDate);
+
+        // Wyświetlanie wyniku w HTML
+        document.querySelector(".span-years").textContent = years;
+        document.querySelector(".span-months").textContent = months;
+        document.querySelector(".span-days").textContent = days;
+      });
+    </script>
+  </body>
+</html>
